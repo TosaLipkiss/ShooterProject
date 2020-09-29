@@ -1,7 +1,10 @@
 float deltaTime;
 float time;
 Player player1;
+Missiles missiles[];
+int numberOfMissiles = 5;
 Enemy enemy;
+boolean launchCollision = false;
 
 void setup()
 {
