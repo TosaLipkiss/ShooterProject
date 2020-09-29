@@ -3,11 +3,16 @@ class Missiles
 	PVector missilesPos = new PVector();
 	PVector missilesVel = new PVector();
 	PVector missilesDir = new PVector();
+
+	PVector currentLocation;
+	PVector targetLocation;
 	PVector playerSeeker = new PVector();
 
-	float missilesAccelation=200;
 	int missilesSize = 40;
 	int numberOfMissiles = 5;
+	// int speed = 0.5;
+	// float moveTime = 0.0;
+
 	boolean missilesLaunch = false;
 
 	float timer;
@@ -15,6 +20,9 @@ class Missiles
 
   public Missiles()
   {
+  	currentLocation = new PVector(enemy.bossPos.x,enemy.bossPos.y);
+	targetLocation = new PVector((player1.playerPosition.x-100), (player1.playerPosition.y));
+
     missilesPos.x = width / 2 + 500;
     missilesPos.y = height / 2;
 
@@ -26,7 +34,9 @@ class Missiles
 
 	void update()
 	{
-		if(timer >= missilesInterval)
+		playerSeeker = currentLocation.lerp(targetLocation, 0.01);
+
+		if(timer > missilesInterval)
 		{
 			missilesLaunch = true;
 			timer = 0;
@@ -34,7 +44,7 @@ class Missiles
 
 		if(missilesLaunch == true)
 		{
-			launch();
+			//launch();
 		}
 
 		timer += deltaTime;
@@ -42,19 +52,7 @@ class Missiles
 
 	void draw()
 	{
-		if(timer >= missilesInterval)
-		{
-			missilesLaunch = true;
-			timer = 0;
-		}
-
-		if(missilesLaunch == true)
-		{
-			missilesGraphic();
-		}
-
-		playerSeeker.x = missilesPos.x * missilesDir.x;
-		playerSeeker.y = missilesPos.y * missilesDir.y;
+		missilesGraphic();
 	}
 
 	  void missilesGraphic()
@@ -63,9 +61,13 @@ class Missiles
 	    ellipse(playerSeeker.x, playerSeeker.y, missilesSize, missilesSize);
 	  }
 
-	 //  void launch()
-	 //  {
-	 //  	missilesDir.x = player1.playerPosition.x;
-		// missilesDir.y = player1.playerPosition.y;
-	 //  }
+	  void launch()
+	  {
+	 //  	moveTime += Time.deltaTime * speed;
+
+	 //  	currentLocation = new PVector(enemy.bossPos.x,enemy.bossPos.y);
+		// targetLocation = new PVector((player1.playerPosition.x-100), (player1.playerPosition.y-100));
+
+	 //  	playerSeeker = currentLocation.lerp(targetLocation, moveTime);
+	  }
 }

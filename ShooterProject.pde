@@ -3,6 +3,7 @@ float time;
 Player player1;
 Bullet[] bullets;
 Enemy enemy;
+Missiles missiles;
 Healthmanager healthmanager;
 boolean launchCollision = false;
 boolean gameover = false;
@@ -16,6 +17,7 @@ void setup()
   bullets = new Bullet[10];
   player1 = new Player();
   enemy = new Enemy();
+  missiles = new Missiles();
 }
 
 void draw()
@@ -27,6 +29,9 @@ void draw()
 
   player1.move();
   player1.display();
+
+  missiles.draw();
+  missiles.update();
 
   enemy.draw();
   enemy.update();
