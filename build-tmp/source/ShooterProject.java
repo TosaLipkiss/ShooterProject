@@ -52,7 +52,7 @@ class Bullet
     bullets = new Bullet[10];
   }
 
-  public void draw() 
+  public void draw()
   {
     //Update bullets
     for (int i = 0; bullets.length; i++) 
@@ -74,7 +74,7 @@ class Bullet
       {
         if (bullets[i] == null) 
         {
-          bullets[i] = new Bullet(player1.position);
+          bullets[i] = new Bullet(playerPosition);
           //we are done, break/quit the loop.
           break;
         }
