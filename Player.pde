@@ -4,14 +4,14 @@ class Player
   float friction = 10;
   float maxVelocity = 1500;
   PVector velocityVector;
-  PVector ellipsePosition;
+  PVector playerPosition;
   int playerWidth = 35;
   int playerHeight = 70;
 
 
   Player()
   {
-    ellipsePosition = new PVector(0 + playerWidth / 2, height / 2);
+    playerPosition = new PVector(0 + playerWidth / 2, height / 2);
     velocityVector = new PVector(0, 0);
   }
 
@@ -33,8 +33,8 @@ class Player
     velocityVector.y += moveVector.y;
 
     velocityVector.limit(maxVelocity);
-    ellipsePosition.x += velocityVector.x * deltaTime;
-    ellipsePosition.y += velocityVector.y * deltaTime;
+    playerPosition.x += velocityVector.x * deltaTime;
+    playerPosition.y += velocityVector.y * deltaTime;
 
   }
 
@@ -42,13 +42,13 @@ class Player
   void display()
   {
     fill(35, 255, 90);
-    ellipse(ellipsePosition.x, ellipsePosition.y, playerWidth, playerHeight);
+    ellipse(playerPosition.x, playerPosition.y, playerWidth, playerHeight);
   }
 
 
   void playerCollision()
   {
-    if (ellipsePosition.y + playerHeight / 2 > height || ellipsePosition.y - playerHeight / 2 < 0)
+    if (playerPosition.y + playerHeight / 2 > height || playerPosition.y - playerHeight / 2 < 0)
     {
       velocityVector.y *= -1; //If the ball touches the end of the screen in y led will bounce back in the other direction
     }
