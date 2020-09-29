@@ -8,6 +8,20 @@ void keyPressed()
     moveUp = true;
   else if (keyCode == DOWN || key == 'd')
     moveDown = true;
+  //Spawn new bullet it we press "space-bar"
+  if (key == 32) 
+  {
+    //Find empty spot in array, create list.
+    for (int i = 0; i < bullets.length; i++) 
+    {
+      if (bullets[i] == null) 
+      {
+        bullets[i] = new Bullet(player1.playerPosition.x, player1.playerPosition.y);
+        //we are done, break/quit the loop.
+        break;
+      }
+    }
+  }
 }
 
 //When a key is released, we will set our variable to false

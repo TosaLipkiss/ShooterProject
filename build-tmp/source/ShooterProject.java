@@ -17,169 +17,155 @@ public class ShooterProject extends PApplet {
 float deltaTime;
 float time;
 Player player1;
+Bullet[] bullets;
 Enemy enemy;
+boolean launchCollision = false;
 
 public void setup()
 {
-	frameRate(144);
-	
+  frameRate(144);
+  
 
-  	player1 = new Player();
-  	enemy = new Enemy();
+  bullets = new Bullet[10];
+  player1 = new Player();
+  enemy = new Enemy();
 }
 
 public void draw()
 {
-	background(0, 0, 0);
+  background(0, 0, 0);
 
-  	long elapsedTime = millis();
-  	deltaTime = (elapsedTime - time) * 0.001f;
-  	
-  	player1.move();
-  	player1.display();
+  long elapsedTime = millis();
+  deltaTime = (elapsedTime - time) * 0.001f;
 
-  	enemy.draw();
-  	enemy.update();
+  player1.move();
+  player1.display();
 
-  	time = elapsedTime;
+  enemy.draw();
+  enemy.update();
+
+  //Update bullets
+  for (int i = 0; i < bullets.length; i++)
+  {
+    if (bullets[i] == null)
+    {
+      //No bullet, skip to the next one.
+      continue;
+    } else
+    {
+      //found a bullet, update it.
+      bullets[i].move();
+      bullets[i].draw();
+    }
+  }
+  time = elapsedTime;
 }
 class Bullet
 {
-  Bullet[] bullets;
+  float x, y;
+  float speed;
 
-  public void setup()
+  Bullet(float x, float y)
   {
-    bullets = new Bullet[10];
+    this.x = x;
+    this.y = y;
+    speed = 8;
   }
-
   public void draw()
   {
-    //Update bullets
-    for (int i = 0; bullets.length; i++) 
-    {
-      if (bullets[i] == null) 
-      {
-        //No bullet, skip to the next one.
-        continue;
-      } else
-      {
-        //found a bullet, update it.
-      }
-    }
+    fill(random(255), random(255), random(255));
+    rect(x, y, 16, 4);
+  }
 
-    //Spawn new bullet it we press "space-bar"
-    if (keyPressed && key == 32) {  
-      //Find empty spot in array, create list.
-      for (int i = 0; bullets.length; i++) 
-      {
-        if (bullets[i] == null) 
-        {
-          bullets[i] = new Bullet(playerPosition);
-          //we are done, break/quit the loop.
-          break;
-        }
-      }
-    }
+  public void move()
+  {
+    x += speed;
   }
 }
 class Enemy
 {
-	PVector bossPos = new PVector();
-	PVector bossVel = new PVector();
-	int bossSize = 200;
-	boolean isCharging = false;
+  PVector bossPos = new PVector();
+  PVector bossVel = new PVector();
+  int bossSize = 200;
+  boolean isCharging = false;
 
-	float timer;
-	float chargeInterval = 8;
+  float timer;
+  float chargeInterval = 8;
 
-	public Enemy()
-	{
-		bossPos.x = width/2 + 500;
-		bossPos.y = height/2;
+  public Enemy()
+  {
+    bossPos.x = width/2 + 500;
+    bossPos.y = height/2;
 
-		bossVel.x = -5;
-		bossVel.y = 1;
-		ellipseMode(CENTER);
-		//startTime = millis();
-		//passedTime = startTime - millis();
-	}
+    bossVel.x = -5;
+    bossVel.y = 1;
+    ellipseMode(CENTER);
+  }
 
-	public void update()
-	{
-		if(bossPos.y <=  width/2 + 500)
-		{
-			bossPos.y += bossVel.y;
-		}
+  public void update()
+  {
+    //Boss only go up and down in Y position when the boss it on this sorten position
+    if (bossPos.y <=  width/2 + 500)
+    {
+      bossPos.y += bossVel.y;
+    }
 
-		if(bossPos.y >= height - bossSize / 2 || bossPos.y <= 0 + bossSize / 2)
-		{
-			bossVel.y *= -1;
-		}
+    //Wall Collisions Y position
+    if (bossPos.y >= height - bossSize / 2 || bossPos.y <= 0 + bossSize / 2)
+    {
+      bossVel.y *= -1;
+    }
 
-		if(timer >= chargeInterval)
-		{
-			isCharging=true;
-			timer = 0;
-		}
+    //Checking if its time for a charge
+    if (timer >= chargeInterval)
+    {
+      isCharging=true;
+      timer = 0;
+    }
 
-		if(isCharging==true)
-		{
-			charge();
-		}
+    if (isCharging==true)
+    {
+      charge();
+    }
 
-		timer += deltaTime;
-	}
+    timer += deltaTime;
+  }
 
-	public void draw()
-	{
-		
-		bossGraphic();
-	}
+  public void draw()
+  {
+    bossGraphic();
+  }
 
-	public void bossGraphic()
-	{
-		push();
-		fill(255, 0, 0);
-		ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
-		pop();
-	}
+  public void bossGraphic()
+  {
+    push();
+    fill(255, 0, 0);
+    ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
+    pop();
+  }
 
-	public void charge()
-	{
-		bossPos.y -= bossVel.y;
-		bossPos.x += bossVel.x;
+  //The boss charges forward in X position in a interval of 5-15 seconds. 
+  public void charge()
+  {
+    bossPos.y -= bossVel.y;
+    bossPos.x += bossVel.x;
 
-		if(bossPos.x <= 0)
-		{
-			bossVel.x *= -1;
-		}
+    //wall Colision X 
+    if (bossPos.x <= 0)
+    {
+      bossVel.x *= -1;
+    }
 
-		if (bossPos.x > width/2 + 500)
-		{
-			bossPos.x = width/2 + 500;
-			chargeInterval = random(5, 15);
-			
-			isCharging = false;
-			bossVel.x *= -1;
-		}
-	}
-}
-class EnemeyBullet
-{
+    //Boss return to its start position
+    if (bossPos.x > width/2 + 500)
+    {
+      bossPos.x = width/2 + 500;
+      chargeInterval = random(5, 15);
 
-
-	public EnemeyBullet()
-	{
-
-	}
-
-
-
-	public void bulletGraphic()
-	{
-		fill(50, 200, 210);
-		//ellipse(pos.x, pos.y, 50, 50);
-	}
+      isCharging = false;
+      bossVel.x *= -1;
+    }
+  }
 }
 boolean moveUp;
 boolean moveDown;
@@ -191,6 +177,20 @@ public void keyPressed()
     moveUp = true;
   else if (keyCode == DOWN || key == 'd')
     moveDown = true;
+  //Spawn new bullet it we press "space-bar"
+  if (key == 32) 
+  {
+    //Find empty spot in array, create list.
+    for (int i = 0; i < bullets.length; i++) 
+    {
+      if (bullets[i] == null) 
+      {
+        bullets[i] = new Bullet(player1.playerPosition.x, player1.playerPosition.y);
+        //we are done, break/quit the loop.
+        break;
+      }
+    }
+  }
 }
 
 //When a key is released, we will set our variable to false
@@ -214,6 +214,40 @@ public PVector input()
 
   input.normalize();
   return input;
+}
+class Missiles
+{
+  PVector missilesPos = new PVector();
+  PVector missilesVel = new PVector();
+
+  float missilesAccelation=200;
+  int missilesSize = 50;
+  boolean missilesLaunch = false;
+
+  float timer;
+  float missilesInterval = 10;
+
+  public Missiles()
+  {
+    missilesPos.x = width / 2 + 500;
+    missilesPos.y = height / 2;
+
+    missilesVel.x = -3;
+    missilesVel.y = random(-3, 3);
+
+    ellipseMode(CENTER);
+  }
+
+  public void draw()
+  {
+    missilesGraphic();
+  }
+
+  public void missilesGraphic()
+  {
+    fill(50, 200, 210);
+    ellipse(missilesPos.x, missilesPos.y, missilesSize, missilesSize);
+  }
 }
 class Player
 {
@@ -252,7 +286,6 @@ class Player
     velocityVector.limit(maxVelocity);
     playerPosition.x += velocityVector.x * deltaTime;
     playerPosition.y += velocityVector.y * deltaTime;
-
   }
 
 
@@ -271,7 +304,7 @@ class Player
     }
   }
 }
-  public void settings() { 	size(1280, 720); }
+  public void settings() {  size(1280, 720); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "ShooterProject" };
     if (passedArgs != null) {

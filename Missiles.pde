@@ -1,34 +1,34 @@
 class Missiles
 {
-	PVector missilesPos = new PVector();
-	PVector missilesVel = new PVector();
+  PVector missilesPos = new PVector();
+  PVector missilesVel = new PVector();
 
-	float missilesAccelation=200;
-	int missilesSize = 50;
-	boolean missilesLaunch = false;
+  float missilesAccelation=200;
+  int missilesSize = 50;
+  boolean missilesLaunch = false;
 
-	float timer;
-	float missilesInterval = 10;
+  float timer;
+  float missilesInterval = 10;
 
-	public Missiles()
-	{
-		missilesPos.x = width / 2 + 500;
-		missilesPos.y = height / 2;
+  public Missiles()
+  {
+    missilesPos.x = width / 2 + 500;
+    missilesPos.y = height / 2;
 
-		missilesVel.x = -3;
-		missilesVel.y = random(-3, 3);
+    missilesVel.x = -3;
+    missilesVel.y = random(-3, 3);
 
-		ellipseMode(CENTER);
-	}
+    ellipseMode(CENTER);
+  }
 
-	void draw()
-	{
-		missilesGraphic();
-	}
+  void draw()
+  {
+    missilesGraphic();
+  }
 
-	void missilesGraphic()
-	{
-		fill(50, 200, 210);
-		ellipse(missilesPos.x, missilesPos.y, missilesSize, missilesSize);
-	}
+  void missilesGraphic()
+  {
+    fill(50, 200, 210);
+    ellipse(missilesPos.x, missilesPos.y, missilesSize, missilesSize);
+  }
 }

@@ -1,39 +1,22 @@
 class Bullet
 {
-  Bullet[] bullets;
+  float x, y;
+  float speed;
 
-  void setup()
+  Bullet(float x, float y)
   {
-    bullets = new Bullet[10];
+    this.x = x;
+    this.y = y;
+    speed = 8;
   }
-
   void draw()
   {
-    //Update bullets
-    for (int i = 0; bullets.length; i++) 
-    {
-      if (bullets[i] == null) 
-      {
-        //No bullet, skip to the next one.
-        continue;
-      } else
-      {
-        //found a bullet, update it.
-      }
-    }
+    fill(random(255), random(255), random(255));
+    rect(x, y, 16, 4);
+  }
 
-    //Spawn new bullet it we press "space-bar"
-    if (keyPressed && key == 32) {  
-      //Find empty spot in array, create list.
-      for (int i = 0; bullets.length; i++) 
-      {
-        if (bullets[i] == null) 
-        {
-          bullets[i] = new Bullet(playerPosition);
-          //we are done, break/quit the loop.
-          break;
-        }
-      }
-    }
+  void move()
+  {
+    x += speed;
   }
 }

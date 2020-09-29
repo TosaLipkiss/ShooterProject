@@ -35,7 +35,6 @@ class Player
     velocityVector.limit(maxVelocity);
     playerPosition.x += velocityVector.x * deltaTime;
     playerPosition.y += velocityVector.y * deltaTime;
-
   }
 
 
