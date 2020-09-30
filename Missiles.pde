@@ -11,10 +11,11 @@ class Missiles
   float acceleration = 300.0;
 
   //Random angle which direction the missile should launch
-  float currentAngle=random(90.0, 270.0);
+  float currentAngle;
+  float upOrDown = random(0, 1);
 
   boolean turnDirection = true;
-  boolean seeker=true;
+  boolean seeker = true;
 
   float time;
   long elapsedTime;
@@ -22,6 +23,15 @@ class Missiles
 
   public Missiles()
   {
+
+  	if (upOrDown < 0.5)
+  	{
+  		currentAngle = random(90.0, 135.0);
+  	}
+  	else
+  	{
+  		currentAngle = random(225.0, 270);
+  	}
   	//start and the current position of missile all the way to target
    currentLocation = new PVector(enemy.bossPos.x, enemy.bossPos.y);
    //aim location, (missiles final destination)
@@ -104,7 +114,7 @@ class Missiles
     if (distanceBetween <= 100)
     {
       seeker = false;
-      println("break direction");
+      //println("break direction");
     }
   }
 }

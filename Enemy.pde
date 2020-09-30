@@ -59,13 +59,15 @@ class Enemy
     	}
     }
 
+
     timerLaunch += deltaTime;
     timer += deltaTime;
   }
 
   void draw()
   {
-  	if(missileLaunch == true)
+
+  	if(missile != null)
   	{
   		missile.draw();
   	}

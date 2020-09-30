@@ -5,8 +5,8 @@ class Player
   float maxVelocity = 1500;
   PVector velocityVector;
   PVector playerPosition;
-  int playerWidth = 35;
-  int playerHeight = 70;
+  int playerWidth = 40;
+  int playerHeight = 40;
 
 
   Player()

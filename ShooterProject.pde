@@ -4,7 +4,6 @@ Player player1;
 Bullet[] bullets;
 Asteroid asteroids;
 Enemy enemy;
-Missiles missiles;
 Healthmanager healthmanager;
 boolean launchCollision = false;
 boolean gameover = false;
@@ -19,7 +18,6 @@ void setup()
   asteroids = new Asteroid();
   player1 = new Player();
   enemy = new Enemy();
-  missiles = new Missiles();
 }
 
 void draw()
@@ -38,6 +36,27 @@ void draw()
   healthmanager.draw();
 
   asteroids.update();
+
+  //collision between player and missile
+  if(enemy.missile != null)
+  {
+  		float missileRadius = enemy.missile.missileSize / 2;
+  		float playerRadius = player1.playerWidth / 2;
+  	  	PVector missileLocation = enemy.missile.currentLocation;
+  	  	PVector playerLocation = player1.playerPosition;
+
+  	  	float a = abs(missileLocation.x - playerLocation.x);
+  	  	float b = abs(missileLocation.y - playerLocation.y);
+  	  	//hypotenusan
+  	  	float c = sqrt((a * a) + (b * b));
+
+  	  	float distance = c - missileRadius - playerRadius;
+
+  	  	if(distance < 0)
+  	  	{
+  	  		enemy.missile = null;
+  	  	}
+  }
 
   //Update bullets
   for (int i = 0; i < bullets.length; i++)
