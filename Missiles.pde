@@ -44,7 +44,25 @@ class Missiles
     elapsedTime = millis();
     deltaTime = (elapsedTime - time) * 0.001f;
 
-    currentDirection = new PVector(cos(radians(currentAngle)), -sin(radians(currentAngle)));
+    launchMissiles();
+    missileGraphic();
+
+    time = elapsedTime;
+  }
+
+/////////METHODS///////////////
+  void missileGraphic()
+  {
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
+  }
+
+
+///The Missile funtion for physics
+  void launchMissiles()
+  {
+  	currentDirection = new PVector(cos(radians(currentAngle)), -sin(radians(currentAngle)));
 
     //calculate distance between target and current location
     PVector targetDirection = new PVector((targetLocation.x - currentLocation.x), (targetLocation.y - currentLocation.y));
@@ -88,16 +106,5 @@ class Missiles
       seeker = false;
       println("break direction");
     }
-
-    missileGraphic();
-
-    time = elapsedTime;
-  }
-
-  void missileGraphic()
-  {
-    noStroke();
-    fill(255, 0, 0);
-    ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
   }
 }
