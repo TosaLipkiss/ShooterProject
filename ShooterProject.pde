@@ -2,6 +2,7 @@ float deltaTime;
 float time;
 Player player1;
 Bullet[] bullets;
+Asteroid asteroids;
 Enemy enemy;
 Missiles missiles;
 Healthmanager healthmanager;
@@ -15,6 +16,7 @@ void setup()
 
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
+  asteroids = new Asteroid();
   player1 = new Player();
   enemy = new Enemy();
   missiles = new Missiles();
@@ -30,12 +32,12 @@ void draw()
   player1.move();
   player1.display();
 
-/*  missiles.draw();*/
-
   enemy.draw();
   enemy.update();
 
   healthmanager.draw();
+
+  asteroids.update();
 
   //Update bullets
   for (int i = 0; i < bullets.length; i++)
