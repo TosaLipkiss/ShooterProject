@@ -1,30 +1,51 @@
 class Healthmanager 
 {
-  float value;
-  float max;
-  float healthBarX;
-  float healthBarY;
-  float healthBarWidth;
-  float healthBarHeight;
+  float playerHealthBarX;
+  float playerHealthBarY;
+  float playerHealthBarWidth;
+  float playerHealthBarWidthDamage;
+  float playerHealthBarHeight;
+
+  float bossHealthbarX;
+  float bossHealthBarY;
+  float bossHealthBarWidth;
+  float bossHealthBarWidthDamage;
+  float bossHealthBarHeight;
+
   color damage;
   color hp;
   
-  Healthmanager()
+  public Healthmanager()
   {
-    value = 50;
-    max = 100;
-    healthBarX = 10;
-    healthBarY = 10;
-    healthBarWidth = 200;
-    healthBarHeight = 10;
+    //Player healthbar
+    playerHealthBarX = 10;
+    playerHealthBarY = 10;
+    playerHealthBarWidth = 200;
+    playerHealthBarWidthDamage = 200;
+    playerHealthBarHeight = 10;
+
+    //Boss healthbar
+    bossHealthbarX = width - 610;
+    bossHealthBarY = 10;
+    bossHealthBarWidth = 600;
+    bossHealthBarWidthDamage = 600;
+    bossHealthBarHeight = 10;
+
+    //Colors
     damage = color(255,0,0);
     hp = color(0,255,0);
   }
-  void draw(){
+  
+  void draw()
+  {
     fill(damage);
-    stroke(0);
-    rect(healthBarX,healthBarY,healthBarWidth,healthBarHeight);
+    rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidth, playerHealthBarHeight);
     fill(hp);
-    rect(healthBarX,healthBarY,map(value,0,max,0,healthBarWidth),healthBarHeight);
+    rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidthDamage, playerHealthBarHeight);
+
+    fill(damage);
+    rect(bossHealthbarX, bossHealthBarY, bossHealthBarWidth, bossHealthBarHeight);
+    fill(hp);
+    rect(bossHealthbarX, bossHealthBarY, bossHealthBarWidthDamage, bossHealthBarHeight);
   }
 }

@@ -3,8 +3,8 @@ class Bullet
   float bulletPosX;
   float bulletPosY;
   float speed;
-  int bulletWidth = 16;
-  int bulletHeight = 4;
+  public int bulletWidth = 16;
+  public int bulletHeight = 4;
 
   Bullet(float x, float y)
   {

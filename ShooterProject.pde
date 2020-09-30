@@ -44,7 +44,8 @@ void draw()
     {
       //No bullet, skip to the next one.
       continue;
-    } else
+    }
+    else
     {
       //found a bullet, update it.
       bullets[i].move();
@@ -53,21 +54,31 @@ void draw()
     if (roundCollision(bullets[i].bulletPosX, bullets[i].bulletPosY, bullets[i].bulletWidth / 2, enemy.bossPos.x, enemy.bossPos.y, enemy.bossSize / 2))
     {
     // gameover = true;
-
+      healthmanager.bossHealthBarWidthDamage -= 20;
+      bullets[i] = null;
+      // bullets[i].bulletWidth = 0;
+      // bullets[i].bulletHeight = 0;
     }
   }
-  
-  // if (gameover)
-  // {
-  //   fill (0, 255, 0);
-  //   textSize(64);
-  //   textAlign(CENTER, CENTER);
-  //   text("GAME OVER", width/2, height/2);
-  // }
+  if (healthmanager.bossHealthBarWidthDamage == 0) 
+  {
+    victory();
+  }
   time = elapsedTime;
 }
-
-void mousePressed()
+  
+void gameover()
 {
-  healthmanager.value = random( healthmanager.max );
+  fill (0, 255, 0);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("GAME OVER", width/2, height/2);
+}
+
+void victory()
+{
+  fill (0, 255, 0);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("VICTORY - BOSS DEFEATED", width/2, height/2);
 }

@@ -1,7 +1,7 @@
 class Player
 {
   float acceleration = 2500;
-  float friction = 10;
+  float friction = 20;
   float maxVelocity = 1500;
   PVector velocityVector;
   PVector playerPosition;
@@ -11,7 +11,7 @@ class Player
 
   Player()
   {
-    playerPosition = new PVector(0 + playerWidth / 2, height / 2);
+    playerPosition = new PVector(playerWidth * 2, height / 2);
     velocityVector = new PVector(0, 0);
   }
 
