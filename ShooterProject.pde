@@ -30,8 +30,7 @@ void draw()
   player1.move();
   player1.display();
 
-  missiles.draw();
-  missiles.update();
+/*  missiles.draw();*/
 
   enemy.draw();
   enemy.update();

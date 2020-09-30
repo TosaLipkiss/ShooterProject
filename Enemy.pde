@@ -4,9 +4,15 @@ class Enemy
   PVector bossVel = new PVector();
   int bossSize = 200;
   boolean isCharging = false;
+  boolean isLaunching = false;
+  boolean missileLaunch = false;
+
+  Missiles missile = null;
 
   float timer;
-  float chargeInterval = 8;
+  float timerLaunch;
+  float chargeInterval = 0;
+  float launchInterval = 3;
 
   public Enemy()
   {
@@ -38,17 +44,32 @@ class Enemy
       isCharging=true;
       timer = 0;
     }
-
     if (isCharging==true)
     {
-      charge();
+        charge();
     }
 
+    if(timerLaunch >= launchInterval)
+    {
+    	if(isCharging==false)
+    	{
+    	missile = new Missiles();
+    	missileLaunch = true;
+    	timerLaunch = 0;  		
+    	}
+    }
+
+    timerLaunch += deltaTime;
     timer += deltaTime;
   }
 
   void draw()
   {
+  	if(missileLaunch == true)
+  	{
+  		missile.draw();
+  	}
+
     bossGraphic();
   }
 
@@ -76,7 +97,7 @@ class Enemy
     if (bossPos.x > width/2 + 500)
     {
       bossPos.x = width/2 + 500;
-      chargeInterval = random(5, 15);
+      chargeInterval = random(10, 15);
 
       isCharging = false;
       bossVel.x *= -1;

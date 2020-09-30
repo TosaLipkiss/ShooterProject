@@ -1,73 +1,105 @@
 class Missiles
 {
-	PVector missilesPos = new PVector();
-	PVector missilesVel = new PVector();
-	PVector missilesDir = new PVector();
+  PVector currentLocation;
+  PVector targetLocation;
 
-	PVector currentLocation;
-	PVector targetLocation;
-	PVector playerSeeker = new PVector();
+  PVector currentDirection;
 
-	int missilesSize = 40;
-	int numberOfMissiles = 5;
-	// int speed = 0.5;
-	// float moveTime = 0.0;
+  float speed=0.0;
+  float maxSpeed=600.0;
+  float acceleration = 300.0;
 
-	boolean missilesLaunch = false;
+  float currentAngle=random(90.0, 270.0);
 
-	float timer;
-	float missilesInterval = 5;
+  boolean turnDirection = true;
+  boolean seeker=true;
+
+  float time;
+  long elapsedTime;
+  float deltaTime;
 
   public Missiles()
   {
-  	currentLocation = new PVector(enemy.bossPos.x,enemy.bossPos.y);
-	targetLocation = new PVector((player1.playerPosition.x-100), (player1.playerPosition.y));
+   currentLocation = new PVector(enemy.bossPos.x, enemy.bossPos.y);
+   targetLocation = new PVector(player1.playerPosition.x, player1.playerPosition.y);
 
-    missilesPos.x = width / 2 + 500;
-    missilesPos.y = height / 2;
+    if (currentAngle <= 180)
+    {
+      turnDirection = true;
+    } 
+    else 
+    {
+      turnDirection = false;
+    }
 
-    missilesVel.x = -3;
-    missilesVel.y = random(-3, 3);
-
-    ellipseMode(CENTER);
+    //println(currentDirection);
   }
 
-	void update()
-	{
-		playerSeeker = currentLocation.lerp(targetLocation, 0.01);
+  void draw() 
+  {
+    elapsedTime = millis();
+    deltaTime = (elapsedTime - time) * 0.001f;
 
-		if(timer > missilesInterval)
-		{
-			missilesLaunch = true;
-			timer = 0;
-		}
+    currentDirection = new PVector(cos(radians(currentAngle)), -sin(radians(currentAngle)));
 
-		if(missilesLaunch == true)
-		{
-			//launch();
-		}
+    PVector targetDirection = new PVector((targetLocation.x - currentLocation.x), (targetLocation.y - currentLocation.y));
+    
+    targetDirection.normalize();
+    println(targetLocation);
 
-		timer += deltaTime;
-	}
+    //calculate the angle between target and current direction, convert radians to degrees.
+    float angleToTarget = degrees(PVector.angleBetween(targetDirection, currentDirection));
 
-	void draw()
-	{
-		missilesGraphic();
-	}
+    currentLocation.x += currentDirection.x * deltaTime * speed;
+    currentLocation.y += currentDirection.y * deltaTime * speed;
 
-	  void missilesGraphic()
-	  {
-	    fill(50, 200, 210);
-	    ellipse(playerSeeker.x, playerSeeker.y, missilesSize, missilesSize);
-	  }
+    speed += (deltaTime * acceleration);
 
-	  void launch()
-	  {
-	 //  	moveTime += Time.deltaTime * speed;
+    if (speed > maxSpeed)
+    {
+      speed = maxSpeed;
+    }
+    //check if what direction missiles if turnDirection (radians=180) is true, go up. If missiles radians is not more than 180 go down
+    if (seeker == true)
+    {
+      if (turnDirection == true)
+      {
+        currentAngle = lerp(currentAngle, currentAngle + angleToTarget, 0.01);
+      } else
+      {
+        currentAngle = lerp(currentAngle, currentAngle - angleToTarget, 0.01);
+      }
+    }
+    //calculate distance between players target position and missiles current position
+    float distanceBetween;
+    distanceBetween = dist(currentLocation.x, currentLocation.y, targetLocation.x, targetLocation.y);
 
-	 //  	currentLocation = new PVector(enemy.bossPos.x,enemy.bossPos.y);
-		// targetLocation = new PVector((player1.playerPosition.x-100), (player1.playerPosition.y-100));
+    //release missile (no longer targeting player)
+    if (distanceBetween <= 100)
+    {
+      seeker = false;
+      println("break direction");
+    }
 
-	 //  	playerSeeker = currentLocation.lerp(targetLocation, moveTime);
-	  }
+    missileGraphic();
+
+/*    stroke(255, 255, 255);
+    line(currentLocation.x, currentLocation.y, currentLocation.x+currentDirection.x*20.0, currentLocation.y+currentDirection.y*20.0);
+    stroke(255, 255, 255);
+    line(currentLocation.x, currentLocation.y, currentLocation.x+targetDirection.x*100.0, currentLocation.y+targetDirection.y*100.0);*/
+
+    time = elapsedTime;
+  }
+
+  void missileGraphic()
+  {
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(currentLocation.x, currentLocation.y, 50, 50);
+  }
+/*  void ball2()
+  {
+    fill(0, 255, 0);
+    ellipse(targetLocation.x, targetLocation.y, 10, 10);
+  }*/
 }
