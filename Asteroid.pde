@@ -9,30 +9,14 @@ class Asteroid
 
   Asteroid()
   {
-    asterPos = new PVector(width, random(25, 695));
-    asterVel.x = -3;
+    asterPos = new PVector(width + random(10, 695), random(25, 695));
+    asterVel.x = random(-6, -4);
     asterVel.y = 0;
   }
 
   void update()
   {
-    // if (timer >= asteroidsInterval)
-    // {
-    //   isAsteroidsRain=true;
-    //   timer = 0;
-    // }
-    // if (isAsteroidsRain==true)
-    // {
-    //   draw();
-    // }
-    draw();
-
-    timer += deltaTime;
-  }
-
-  void draw()
-  {
-    asteroidRain();
+    asterPos.x += asterVel.x;
     asteroidGrahpic();
   }
 
@@ -41,10 +25,5 @@ class Asteroid
     fill(0, 100, 100);
     ellipse(asterPos.x, asterPos.y, asterSize, asterSize);
     ellipseMode(CENTER);
-  }
-
-  void asteroidRain()
-  {
-    asterPos.x += asterVel.x;
   }
 }

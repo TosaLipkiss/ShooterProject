@@ -15,9 +15,15 @@ void setup()
 
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
-  asteroids = new Asteroid[100];
+  asteroids = new Asteroid[10];
   player1 = new Player();
   enemy = new Enemy();
+
+  for (int i = 0; i < asteroids.length; i++) 
+  {
+    asteroids[i] = new Asteroid();
+    //we are done, break/quit the loop.
+  }
 }
 
 void draw()
@@ -26,6 +32,20 @@ void draw()
 
   long elapsedTime = millis();
   deltaTime = (elapsedTime - time) * 0.001f;
+
+  for (int i = 0; i < asteroids.length; i++) 
+  {
+    asteroids[i].update();
+    if (asteroids[i].asterPos.x < 0) 
+    {
+      asteroids[i] = new Asteroid();
+    }
+    if (roundCollision(asteroids[i].asterPos.x, asteroids[i].asterPos.y, asteroids[i].asterSize / 2, player1.playerPosition.x, player1.playerPosition.y, player1.playerWidth / 2))
+    {
+      healthmanager.playerHealthBarWidthDamage -= 20;
+      asteroids[i] = new Asteroid();
+    }
+  }
 
   player1.move();
   player1.display();
@@ -38,20 +58,9 @@ void draw()
   //collision between player and missile
 	missileCollision();
 
-  for (int i = 0; i < asteroids.length; i++)
-  {
-    if (asteroids[i] == null)
-    {
-      //No Asteroid, skip to the next one.
-      continue;
-    }
-    else
-    {
-      //found an Asteroid, update it.
-      asteroids[i] = new Asteroid();
-      asteroids[i].update();
-    }
-  }
+
+  
+  
 
   //Update bullets
   for (int i = 0; i < bullets.length; i++)
@@ -69,10 +78,10 @@ void draw()
     }
     if (roundCollision(bullets[i].bulletPosX, bullets[i].bulletPosY, bullets[i].bulletWidth / 2, enemy.bossPos.x, enemy.bossPos.y, enemy.bossSize / 2))
     {
-      healthmanager.bossHealthBarWidthDamage -= 20;
+      healthmanager.bossHealthBarWidthDamage -= 5;
       bullets[i] = null;
     }
-    else if (bullets[i].bulletPosX >= width) 
+    else if (bullets[i].bulletPosX >= width)
     {
       bullets[i] = null;  
     }
