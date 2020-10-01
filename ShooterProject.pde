@@ -1,12 +1,16 @@
 float deltaTime;
 float time;
+float startTime;
+float endTime;
 Player player1;
 Bullet[] bullets;
 Asteroid[] asteroids;
 Enemy enemy;
 Healthmanager healthmanager;
 boolean launchCollision = false;
-boolean gameover = false;
+boolean gameOver = false;
+boolean win = false;
+boolean timerStopped = false;
 
 boolean isMouseHowering = false;
 boolean isStartGame = false;
@@ -21,6 +25,7 @@ void setup()
 {
   frameRate(144);
   size(1280, 720);
+  startTime = millis();
 
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
@@ -52,7 +57,16 @@ void draw()
         }
       }
     }
-  } else 
+  } 
+  else if (gameOver == true)
+  {
+    gameover();
+  }
+  else if (win == true)
+  {
+    victory();
+  }
+  else
   {
     background(0, 0, 0);
 
@@ -101,10 +115,15 @@ void gameover()
 void victory()
 {
   enemy.bossSize = 0;
+  if (timerStopped == false) 
+  {
+  endTime = (millis() - startTime) * 0.001f;
+  }
+  timerStopped = true;
   fill (0, 255, 0);
   textSize(64);
   textAlign(CENTER, CENTER);
-  text("VICTORY - BOSS DEFEATED", width/2, height/2);
+  text("VICTORY - BOSS DEFEATED\nTOTAL TIME: " + endTime, width/2, height/2);
 }
 
 void StartButton()
