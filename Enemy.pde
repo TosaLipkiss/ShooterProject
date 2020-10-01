@@ -46,17 +46,17 @@ class Enemy
     }
     if (isCharging==true)
     {
-        charge();
+      charge();
     }
 
-    if(timerLaunch >= launchInterval)
+    if (timerLaunch >= launchInterval)
     {
-    	if(isCharging==false)
-    	{
-    	missile = new Missiles();
-    	missileLaunch = true;
-    	timerLaunch = 0;  		
-    	}
+      if (isCharging==false)
+      {
+        missile = new Missiles();
+        missileLaunch = true;
+        timerLaunch = 0;
+      }
     }
 
 
@@ -67,10 +67,10 @@ class Enemy
   void draw()
   {
 
-  	if(missile != null)
-  	{
-  		missile.draw();
-  	}
+    if (missile != null)
+    {
+      missile.draw();
+    }
 
     bossGraphic();
   }

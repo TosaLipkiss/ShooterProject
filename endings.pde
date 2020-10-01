@@ -10,7 +10,7 @@ void endings()
   {
     victory();
   }
-  
+
 
   if (healthmanager.playerHealthBarWidthDamage <= 0)
   {

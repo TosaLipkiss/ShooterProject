@@ -1,6 +1,6 @@
 void asteroidSpawn()
 {
-	for (int i = 0; i < asteroids.length; i++) 
+  for (int i = 0; i < asteroids.length; i++) 
   {
     asteroids[i].update();
     if (asteroids[i].asterPos.x < 0) 

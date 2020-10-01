@@ -14,7 +14,7 @@ class Healthmanager
 
   color damage;
   color hp;
-  
+
   public Healthmanager()
   {
     //Player healthbar
@@ -32,10 +32,10 @@ class Healthmanager
     bossHealthBarHeight = 10;
 
     //Colors
-    damage = color(255,0,0);
-    hp = color(0,255,0);
+    damage = color(255, 0, 0);
+    hp = color(0, 255, 0);
   }
-  
+
   void draw()
   {
     if (playerHealthBarWidthDamage < 0)
@@ -44,17 +44,19 @@ class Healthmanager
     }
 
     fill(damage);
+    rectMode(CORNER);
     rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidth, playerHealthBarHeight);
     fill(hp);
     rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidthDamage, playerHealthBarHeight);
 
-    
+
     if (bossHealthBarWidthDamage < 0) 
     {
-      bossHealthBarWidthDamage = 0;  
+      bossHealthBarWidthDamage = 0;
     }
 
     fill(damage);
+    rectMode(CORNER);
     rect(bossHealthbarX, bossHealthBarY, bossHealthBarWidth, bossHealthBarHeight);
     fill(hp);
     rect(bossHealthbarX, bossHealthBarY, bossHealthBarWidthDamage, bossHealthBarHeight);

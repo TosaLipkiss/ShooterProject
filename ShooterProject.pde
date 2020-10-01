@@ -8,6 +8,15 @@ Healthmanager healthmanager;
 boolean launchCollision = false;
 boolean gameover = false;
 
+boolean isMouseHowering = false;
+boolean isStartGame = false;
+boolean runMainMenu = true;
+
+float rectPosX = width/2;
+float rectPosY = height/2;
+float rectSizeX = 315.0;
+float rectSizeY = 115.0;
+
 void setup()
 {
   frameRate(144);
@@ -27,35 +36,54 @@ void setup()
 
 void draw()
 {
-  background(0, 0, 0);
+  if (runMainMenu == true)
+  {
+    background(0, 0, 0);
+    StartButton();
 
-  long elapsedTime = millis();
-  deltaTime = (elapsedTime - time) * 0.001f;
+    if ((mouseY < (height/2 + 50)) && (mouseY > height/2 - 50))
+    {
+      if ((mouseX < (width/2 + 150)) && (mouseX > width/2 - 150))
+      {
+        if (mousePressed)
+        {
+          println("Start game");
+          runMainMenu = false;
+        }
+      }
+    }
+  } else 
+  {
+    background(0, 0, 0);
 
-  //spawn asteroids
-  asteroidSpawn();
+    long elapsedTime = millis();
+    deltaTime = (elapsedTime - time) * 0.001f;
 
-  //draw and update player position
-  player1.move();
-  player1.display();
+    //spawn asteroids
+    asteroidSpawn();
 
-  //draw and update enemy (Boss) position
-  enemy.draw();
-  enemy.update();
+    //draw and update player position
+    player1.move();
+    player1.display();
 
-  //draw hp bars
-  healthmanager.draw();
+    //draw and update enemy (Boss) position
+    enemy.draw();
+    enemy.update();
 
-  //checks collision between player and missile
-	missileCollision();
+    //draw hp bars
+    healthmanager.draw();
 
-  //spawning & despawning bullets (through collision or leaving the game window)
-  updateBullets();
+    //checks collision between player and missile
+    missileCollision();
 
-  //end scenarios
-  endings();
-  
-  time = elapsedTime;
+    //spawning & despawning bullets (through collision or leaving the game window)
+    updateBullets();
+
+    //end scenarios
+    endings();
+
+    time = elapsedTime;
+  }
 }
 
 ////////METHODS///
@@ -79,4 +107,15 @@ void victory()
   text("VICTORY - BOSS DEFEATED", width/2, height/2);
 }
 
+void StartButton()
+{
+  noStroke();
+  fill(250, 150, 10);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 100);
 
+  fill(0, 0, 0);
+  textSize(42);
+  textAlign(CENTER, CENTER);
+  text("START", width/2, height/2);
+}

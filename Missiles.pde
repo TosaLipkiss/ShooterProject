@@ -24,20 +24,19 @@ class Missiles
   public Missiles()
   {
 
-  	if (upOrDown < 0.5)
-  	{
-  		currentAngle = random(90.0, 135.0);
-  	}
-  	else
-  	{
-  		currentAngle = random(225.0, 270);
-  	}
-  	//start and the current position of missile all the way to target
-   currentLocation = new PVector(enemy.bossPos.x, enemy.bossPos.y);
-   //aim location, (missiles final destination)
-   targetLocation = new PVector(player1.playerPosition.x, player1.playerPosition.y);
+    if (upOrDown < 0.5)
+    {
+      currentAngle = random(90.0, 135.0);
+    } else
+    {
+      currentAngle = random(225.0, 270);
+    }
+    //start and the current position of missile all the way to target
+    currentLocation = new PVector(enemy.bossPos.x, enemy.bossPos.y);
+    //aim location, (missiles final destination)
+    targetLocation = new PVector(player1.playerPosition.x, player1.playerPosition.y);
 
-   //If the current angle is more than 180 degrees, turn (if true the missile goes up)
+    //If the current angle is more than 180 degrees, turn (if true the missile goes up)
     if (currentAngle <= 180)
     {
       turnDirection = true;
@@ -60,7 +59,7 @@ class Missiles
     time = elapsedTime;
   }
 
-/////////METHODS///////////////
+  /////////METHODS///////////////
   void missileGraphic()
   {
     noStroke();
@@ -69,10 +68,10 @@ class Missiles
   }
 
 
-///The Missile funtion for physics
+  ///The Missile funtion for physics
   void launchMissiles()
   {
-  	currentDirection = new PVector(cos(radians(currentAngle)), -sin(radians(currentAngle)));
+    currentDirection = new PVector(cos(radians(currentAngle)), -sin(radians(currentAngle)));
 
     //calculate distance between target and current location
     PVector targetDirection = new PVector((targetLocation.x - currentLocation.x), (targetLocation.y - currentLocation.y));
