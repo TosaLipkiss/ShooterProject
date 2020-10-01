@@ -70,7 +70,7 @@ void draw()
   time = elapsedTime;
 }
 
-////////METHODS////////////
+////////METHODS///
 void gameover()
 {
   fill (0, 255, 0);
@@ -87,37 +87,6 @@ void victory()
   text("VICTORY - BOSS DEFEATED", width/2, height/2);
 }
 
-void bulletCollision()
-{
-	  //Update bullets
-  for (int i = 0; i < bullets.length; i++)
-  {
-    if (bullets[i] == null)
-    {
-      //No bullet, skip to the next one.
-      continue;
-    }
-    else
-    {
-      //found a bullet, update it.
-      bullets[i].move();
-      bullets[i].draw();
-    }
-    if (roundCollision(bullets[i].bulletPosX, bullets[i].bulletPosY, bullets[i].bulletWidth / 2, enemy.bossPos.x, enemy.bossPos.y, enemy.bossSize / 2))
-    {
-    // gameover = true;
-      healthmanager.bossHealthBarWidthDamage -= 20;
-      bullets[i] = null;
-      // bullets[i].bulletWidth = 0;
-      // bullets[i].bulletHeight = 0;
-    }
-  }
-  if (healthmanager.bossHealthBarWidthDamage == 0) 
-  {
-    victory();
-  }
-}
-
 void missileCollision()
 {
 	  if(enemy.missile != null)
@@ -130,7 +99,7 @@ void missileCollision()
   	  	//dist()
   	  	float a = abs(missileLocation.x - playerLocation.x);
   	  	float b = abs(missileLocation.y - playerLocation.y);
-  	  	//hypotenusan // kvotroten
+  	  	//hypotenusan
   	  	float c = sqrt((a * a) + (b * b));
 
   	  	float distance = c - missileRadius - playerRadius;
