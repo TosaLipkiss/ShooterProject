@@ -15,6 +15,7 @@ boolean timerStopped = false;
 boolean isMouseHowering = false;
 boolean isStartGame = false;
 boolean runMainMenu = true;
+color startButtonBackground = color(250, 150, 10);
 
 float rectPosX = width/2;
 float rectPosY = height/2;
@@ -50,12 +51,15 @@ void draw()
     {
       if ((mouseX < (width/2 + 150)) && (mouseX > width/2 - 150))
       {
+      	howerGraphics();
+      	startButtonBackground = color(255, 250, 50);
         if (mousePressed)
         {
           println("Start game");
           runMainMenu = false;
         }
       }
+      startButtonBackground = color(250, 150, 10);
     }
   } 
   else if (gameOver == true)
@@ -138,3 +142,10 @@ void StartButton()
   textAlign(CENTER, CENTER);
   text("START", width/2, height/2);
 }
+
+void howerGraphics()
+ {
+  fill(255, 255, 255, 50);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 100);  
+ }
