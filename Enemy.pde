@@ -11,7 +11,7 @@ class Enemy
 
   float timer;
   float timerLaunch;
-  float chargeInterval = 0;
+  float chargeInterval = 3;
   float launchInterval = 3;
 
   public Enemy()

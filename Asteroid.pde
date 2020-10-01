@@ -16,15 +16,16 @@ class Asteroid
 
   void update()
   {
-    if (timer >= asteroidsInterval)
-    {
-      isAsteroidsRain=true;
-      timer = 0;
-    }
-    if (isAsteroidsRain==true)
-    {
-      draw();
-    }
+    // if (timer >= asteroidsInterval)
+    // {
+    //   isAsteroidsRain=true;
+    //   timer = 0;
+    // }
+    // if (isAsteroidsRain==true)
+    // {
+    //   draw();
+    // }
+    draw();
 
     timer += deltaTime;
   }

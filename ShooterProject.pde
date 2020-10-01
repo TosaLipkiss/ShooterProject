@@ -2,7 +2,7 @@ float deltaTime;
 float time;
 Player player1;
 Bullet[] bullets;
-Asteroid asteroids;
+Asteroid[] asteroids;
 Enemy enemy;
 Healthmanager healthmanager;
 boolean launchCollision = false;
@@ -15,7 +15,7 @@ void setup()
 
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
-  asteroids = new Asteroid();
+  asteroids = new Asteroid[100];
   player1 = new Player();
   enemy = new Enemy();
 }
@@ -35,10 +35,23 @@ void draw()
 
   healthmanager.draw();
 
-  asteroids.update();
-
   //collision between player and missile
 	missileCollision();
+
+  for (int i = 0; i < asteroids.length; i++)
+  {
+    if (asteroids[i] == null)
+    {
+      //No Asteroid, skip to the next one.
+      continue;
+    }
+    else
+    {
+      //found an Asteroid, update it.
+      asteroids[i] = new Asteroid();
+      asteroids[i].update();
+    }
+  }
 
   //Update bullets
   for (int i = 0; i < bullets.length; i++)
@@ -56,16 +69,31 @@ void draw()
     }
     if (roundCollision(bullets[i].bulletPosX, bullets[i].bulletPosY, bullets[i].bulletWidth / 2, enemy.bossPos.x, enemy.bossPos.y, enemy.bossSize / 2))
     {
-    // gameover = true;
       healthmanager.bossHealthBarWidthDamage -= 20;
       bullets[i] = null;
-      // bullets[i].bulletWidth = 0;
-      // bullets[i].bulletHeight = 0;
+    }
+    else if (bullets[i].bulletPosX >= width) 
+    {
+      bullets[i] = null;  
     }
   }
-  if (healthmanager.bossHealthBarWidthDamage == 0) 
+
+
+  if (roundCollision(player1.playerPosition.x, player1.playerPosition.y, player1.playerWidth / 2, enemy.bossPos.x, enemy.bossPos.y, enemy.bossSize / 2)) 
+  {
+    gameover();
+  }
+
+
+  if (healthmanager.bossHealthBarWidthDamage <= 0) 
   {
     victory();
+  }
+  
+
+  if (healthmanager.playerHealthBarWidthDamage <= 0)
+  {
+    gameover();
   }
   time = elapsedTime;
 }
@@ -73,6 +101,9 @@ void draw()
 ////////METHODS///
 void gameover()
 {
+  player1.playerWidth = 0;
+  player1.playerHeight = 0;
+  healthmanager.playerHealthBarWidthDamage = 0;
   fill (0, 255, 0);
   textSize(64);
   textAlign(CENTER, CENTER);
@@ -81,6 +112,7 @@ void gameover()
 
 void victory()
 {
+  enemy.bossSize = 0;
   fill (0, 255, 0);
   textSize(64);
   textAlign(CENTER, CENTER);
@@ -106,6 +138,7 @@ void missileCollision()
 
   	  	if(distance < 0)
   	  	{
+          healthmanager.playerHealthBarWidthDamage -= 60;
   	  		enemy.missile = null;
   	  	}
   }

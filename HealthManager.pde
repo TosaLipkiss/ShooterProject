@@ -38,10 +38,21 @@ class Healthmanager
   
   void draw()
   {
+    if (playerHealthBarWidthDamage < 0)
+    {
+      playerHealthBarWidthDamage = 0;
+    }
+
     fill(damage);
     rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidth, playerHealthBarHeight);
     fill(hp);
     rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidthDamage, playerHealthBarHeight);
+
+    
+    if (bossHealthBarWidthDamage < 0) 
+    {
+      bossHealthBarWidthDamage = 0;  
+    }
 
     fill(damage);
     rect(bossHealthbarX, bossHealthBarY, bossHealthBarWidth, bossHealthBarHeight);
