@@ -7,12 +7,15 @@ class Player
   PVector playerPosition;
   int playerWidth = 40;
   int playerHeight = 40;
+  PImage spaceSquirrel;
+  
 
 
   Player()
   {
     playerPosition = new PVector(playerWidth * 2, height / 2);
     velocityVector = new PVector(0, 0);
+    spaceSquirrel = loadImage("sprite_player_80x80.png");  
   }
 
 
@@ -42,6 +45,7 @@ class Player
   {
     fill(35, 255, 90);
     ellipse(playerPosition.x, playerPosition.y, playerWidth, playerHeight);
+    image(spaceSquirrel, playerPosition.x, playerPosition.y);
   }
 
 

@@ -7,6 +7,8 @@ class Enemy
   boolean isLaunching = false;
   boolean missileLaunch = false;
 
+  PImage bossSprite;
+
   Missiles missile = null;
 
   float timer;
@@ -18,6 +20,8 @@ class Enemy
   {
     bossPos.x = width/2 + 500;
     bossPos.y = height/2;
+
+    bossSprite = loadImage("sprite_boss0001.png");
 
     bossVel.x = -5;
     bossVel.y = 1;
@@ -80,6 +84,7 @@ class Enemy
     push();
     fill(255, 0, 0);
     ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
+    image(bossSprite, bossPos.x, bossPos.y);
     pop();
   }
 

@@ -2,11 +2,17 @@ float deltaTime;
 float time;
 float startTime;
 float endTime;
+
 Player player1;
-Bullet[] bullets;
-Asteroid[] asteroids;
+
+PImage splashScreen;
+
 Enemy enemy;
 Healthmanager healthmanager;
+
+Bullet[] bullets;
+Asteroid[] asteroids;
+
 boolean launchCollision = false;
 boolean gameOver = false;
 boolean win = false;
@@ -26,7 +32,11 @@ void setup()
 {
   frameRate(144);
   size(1280, 720);
+  imageMode(CENTER);
   startTime = millis();
+
+
+  splashScreen = loadImage("SplashScreen.png");
 
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
@@ -45,6 +55,7 @@ void draw()
   if (runMainMenu == true)
   {
     background(0, 0, 0);
+    image(splashScreen, width / 2, height / 2);
     StartButton();
 
     if ((mouseY < (height/2 + 50)) && (mouseY > height/2 - 50))

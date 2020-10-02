@@ -4,6 +4,8 @@ class Missiles
   PVector currentLocation;
   PVector targetLocation;
 
+  PImage missileSprite;
+
   PVector currentDirection;
 
   float speed=0.0;
@@ -23,13 +25,14 @@ class Missiles
 
   public Missiles()
   {
+  	missileSprite = loadImage("sprite_missile_55x55.png");
 
     if (upOrDown < 0.5)
     {
-      currentAngle = random(90.0, 135.0);
+      currentAngle = random(110, 140);
     } else
     {
-      currentAngle = random(225.0, 270);
+      currentAngle = random(220, 250);
     }
     //start and the current position of missile all the way to target
     currentLocation = new PVector(enemy.bossPos.x, enemy.bossPos.y);
@@ -65,6 +68,7 @@ class Missiles
     noStroke();
     fill(255, 0, 0);
     ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
+    image(missileSprite, currentLocation.x, currentLocation.y);
   }
 
 
