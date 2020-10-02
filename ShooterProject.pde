@@ -33,16 +33,23 @@ void setup()
   frameRate(144);
   size(1280, 720);
   imageMode(CENTER);
-  startTime = millis();
-
 
   splashScreen = loadImage("SplashScreen.png");
+  start();
+}
 
+void start()
+{
+  startTime = millis();
   healthmanager = new Healthmanager();
   bullets = new Bullet[10];
   asteroids = new Asteroid[10];
   player1 = new Player();
   enemy = new Enemy();
+
+  win = false;
+  gameOver = false;
+  runMainMenu = true;
 
   for (int i = 0; i < asteroids.length; i++) 
   {
@@ -159,4 +166,9 @@ void howerGraphics()
   fill(255, 255, 255, 50);
   rectMode(CENTER);
   rect(width/2, height/2 + 100, 300, 100);  
+ }
+
+ void spaceToContinue()
+ {
+  
  }

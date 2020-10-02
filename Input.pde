@@ -22,6 +22,10 @@ void keyPressed()
       }
     }
   }
+  if (key == 'b')
+  {
+    start();
+  }
 }
 
 //When a key is released, we will set our variable to false
