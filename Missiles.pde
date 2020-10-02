@@ -65,12 +65,15 @@ class Missiles
   /////////METHODS///////////////
   void missileGraphic()
   {
-    noStroke();
-    fill(255, 0, 0);
+/*    noStroke();
+    fill(255, 0, 0);*/
     // ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
-    image(missileSprite, currentLocation.x, currentLocation.y);
+    pushMatrix();
+    translate(currentLocation.x + 27.5, currentLocation.y + 27.5);
+    rotate(radians(-currentAngle+180.0));
+    image(missileSprite, -27.5, -27.5);
+    popMatrix();
   }
-
 
   ///The Missile funtion for physics
   void launchMissiles()

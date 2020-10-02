@@ -28,7 +28,6 @@ void keyPressed()
   }
 }
 
-//When a key is released, we will set our variable to false
 void keyReleased()
 {
   if (keyCode == UP || key == 'a')

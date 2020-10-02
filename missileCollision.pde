@@ -8,8 +8,8 @@ void missileCollision()
     PVector playerLocation = player1.playerPosition;
 
     //dist()
-    float a = abs(missileLocation.x - playerLocation.x);
-    float b = abs(missileLocation.y - playerLocation.y);
+    float a = (missileLocation.x - playerLocation.x);
+    float b = (missileLocation.y - playerLocation.y);
     //hypotenusan
     float c = sqrt((a * a) + (b * b));
 
@@ -18,6 +18,7 @@ void missileCollision()
     if (distance < 0)
     {
       healthmanager.playerHealthBarWidthDamage -= 60;
+      spawnMissileExplosion(missileLocation);
       enemy.missile = null;
     }
   }

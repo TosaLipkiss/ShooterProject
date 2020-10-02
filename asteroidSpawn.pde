@@ -10,6 +10,7 @@ void asteroidSpawn()
     if (roundCollision(asteroids[i].asterPos.x, asteroids[i].asterPos.y, asteroids[i].asterSize / 2, player1.playerPosition.x, player1.playerPosition.y, player1.playerWidth / 2))
     {
       healthmanager.playerHealthBarWidthDamage -= 20;
+      spawnAsteroidExplosion(asteroids[i].asterPos);
       asteroids[i] = new Asteroid();
     }
   }

@@ -12,6 +12,8 @@ Healthmanager healthmanager;
 
 Bullet[] bullets;
 Asteroid[] asteroids;
+AsteroidExplosion asteroidExplosion = null;
+MissileExplosion missileExplosion = null;
 
 boolean launchCollision = false;
 boolean gameOver = false;
@@ -69,8 +71,8 @@ void draw()
     {
       if ((mouseX < (width/2 + 150)) && (mouseX > width/2 - 150))
       {
-      	howerGraphics();
-      	startButtonBackground = color(255, 250, 50);
+        howerGraphics();
+        startButtonBackground = color(255, 250, 50);
         if (mousePressed)
         {
           println("Start game");
@@ -79,23 +81,19 @@ void draw()
       }
       startButtonBackground = color(250, 150, 10);
     }
-  } 
-  else if (gameOver == true)
+  } else if (gameOver == true)
   {
     gameover();
-  }
-  else if (win == true)
+  } else if (win == true)
   {
     victory();
-  }
-  else
+  } else
   {
     background(0, 0, 0);
 
     long elapsedTime = millis();
     deltaTime = (elapsedTime - time) * 0.001f;
 
-    //spawn asteroids
     asteroidSpawn();
 
     //draw and update player position
@@ -106,7 +104,16 @@ void draw()
     enemy.draw();
     enemy.update();
 
-    //draw hp bars
+    if (asteroidExplosion!=null)
+    {
+      asteroidExplosion.draw();
+    }
+
+    if (missileExplosion!=null)
+    {
+      missileExplosion.draw();
+    }
+
     healthmanager.draw();
 
     //checks collision between player and missile
@@ -139,7 +146,7 @@ void victory()
   enemy.bossSize = 0;
   if (timerStopped == false) 
   {
-  endTime = (millis() - startTime) * 0.001f;
+    endTime = (millis() - startTime) * 0.001f;
   }
   timerStopped = true;
   fill (0, 255, 0);
@@ -162,13 +169,21 @@ void StartButton()
 }
 
 void howerGraphics()
- {
+{
   fill(255, 255, 255, 50);
   rectMode(CENTER);
-  rect(width/2, height/2 + 100, 300, 100);  
- }
+  rect(width/2, height/2 + 100, 300, 100);
+}
 
- void spaceToContinue()
- {
-  
- }
+void spaceToContinue()
+{
+}
+
+void spawnAsteroidExplosion(PVector position)
+{
+  asteroidExplosion = new AsteroidExplosion(position);
+}
+void spawnMissileExplosion(PVector position)
+{
+  missileExplosion = new MissileExplosion(position);
+}

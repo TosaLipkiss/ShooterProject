@@ -47,7 +47,7 @@ class Enemy
       bossVel.y *= -1;
     }
 
-    //Checking if its time for a charge
+    //Checking if its time to charge
     if (timer >= chargeInterval)
     {
       isCharging=true;
@@ -86,8 +86,8 @@ class Enemy
 
   void bossGraphic()
   {
-/*    fill(255, 0, 0);*/
-    // ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
+/*    fill(255, 0, 0);
+    ellipse(bossPos.x, bossPos.y, bossSize, bossSize);*/
     if(spriteTimer > 0.1)
     {
     	currentFrame++;
