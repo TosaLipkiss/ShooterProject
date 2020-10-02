@@ -1,13 +1,15 @@
 class Enemy
 {
+  int currentFrame = 0;
+  PImage[] bossSprite = new PImage[10];
+  float spriteTimer = 0;
+
   PVector bossPos = new PVector();
   PVector bossVel = new PVector();
   int bossSize = 200;
   boolean isCharging = false;
   boolean isLaunching = false;
   boolean missileLaunch = false;
-
-  PImage bossSprite;
 
   Missiles missile = null;
 
@@ -18,10 +20,13 @@ class Enemy
 
   public Enemy()
   {
+  	    for(int i = 0 ; i < bossSprite.length ; i++)
+    {
+    	bossSprite[i] = loadImage("sprite_boss" + (i +1) + ".png");
+    }
+
     bossPos.x = width/2 + 500;
     bossPos.y = height/2;
-
-    bossSprite = loadImage("sprite_boss0001.png");
 
     bossVel.x = -5;
     bossVel.y = 1;
@@ -81,11 +86,17 @@ class Enemy
 
   void bossGraphic()
   {
-    push();
-    fill(255, 0, 0);
+/*    fill(255, 0, 0);*/
     // ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
-    image(bossSprite, bossPos.x, bossPos.y);
-    pop();
+    if(spriteTimer > 0.1)
+    {
+    	currentFrame++;
+    	spriteTimer = 0;
+    }
+
+    image(bossSprite[currentFrame % bossSprite.length], bossPos.x, bossPos.y);
+
+    spriteTimer += deltaTime;
   }
 
   //The boss charges forward in X position in a interval of 5-15 seconds. 
