@@ -6,6 +6,7 @@ float endTime;
 Player player1;
 
 PImage splashScreen;
+PImage gameBackground;
 
 Enemy enemy;
 Healthmanager healthmanager;
@@ -37,6 +38,7 @@ void setup()
   imageMode(CENTER);
 
   splashScreen = loadImage("SplashScreen.png");
+  gameBackground = loadImage("Background.png");
   start();
 }
 
@@ -87,9 +89,10 @@ void draw()
   } else if (win == true)
   {
     victory();
-  } else
+  }
+   else
   {
-    background(0, 0, 0);
+    image(gameBackground, width / 2, height / 2);
 
     long elapsedTime = millis();
     deltaTime = (elapsedTime - time) * 0.001f;
