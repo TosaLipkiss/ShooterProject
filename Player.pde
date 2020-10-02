@@ -44,7 +44,7 @@ class Player
   void display()
   {
     fill(35, 255, 90);
-    ellipse(playerPosition.x, playerPosition.y, playerWidth, playerHeight);
+    // ellipse(playerPosition.x, playerPosition.y, playerWidth, playerHeight);
     image(spaceSquirrel, playerPosition.x, playerPosition.y);
   }
 

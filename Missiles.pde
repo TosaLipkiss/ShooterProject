@@ -67,7 +67,7 @@ class Missiles
   {
     noStroke();
     fill(255, 0, 0);
-    ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
+    // ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
     image(missileSprite, currentLocation.x, currentLocation.y);
   }
 

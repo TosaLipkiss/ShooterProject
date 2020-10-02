@@ -83,7 +83,7 @@ class Enemy
   {
     push();
     fill(255, 0, 0);
-    ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
+    // ellipse(bossPos.x, bossPos.y, bossSize, bossSize);
     image(bossSprite, bossPos.x, bossPos.y);
     pop();
   }

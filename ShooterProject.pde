@@ -58,7 +58,7 @@ void draw()
     image(splashScreen, width / 2, height / 2);
     StartButton();
 
-    if ((mouseY < (height/2 + 50)) && (mouseY > height/2 - 50))
+    if ((mouseY < (height/2 + 150)) && (mouseY > height/2 + 50))
     {
       if ((mouseX < (width/2 + 150)) && (mouseX > width/2 - 150))
       {
@@ -146,17 +146,17 @@ void StartButton()
   noStroke();
   fill(250, 150, 10);
   rectMode(CENTER);
-  rect(width/2, height/2, 300, 100);
+  rect(width/2, height/2 + 100, 300, 100);
 
   fill(0, 0, 0);
   textSize(42);
   textAlign(CENTER, CENTER);
-  text("START", width/2, height/2);
+  text("START", width/2, height/2 + 100);
 }
 
 void howerGraphics()
  {
   fill(255, 255, 255, 50);
   rectMode(CENTER);
-  rect(width/2, height/2, 300, 100);  
+  rect(width/2, height/2 + 100, 300, 100);  
  }
