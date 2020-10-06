@@ -5,12 +5,10 @@ void endings()
     gameOver = true;
   }
 
-
   if (healthmanager.bossHealthBarWidthDamage <= 0) 
   {
     win = true;
   }
-
 
   if (healthmanager.playerHealthBarWidthDamage <= 0)
   {

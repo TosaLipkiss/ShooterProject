@@ -49,7 +49,6 @@ class Healthmanager
     fill(hp);
     rect(playerHealthBarX, playerHealthBarY, playerHealthBarWidthDamage, playerHealthBarHeight);
 
-
     if (bossHealthBarWidthDamage < 0) 
     {
       bossHealthBarWidthDamage = 0;

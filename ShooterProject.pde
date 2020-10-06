@@ -21,13 +21,12 @@ boolean gameOver = false;
 boolean win = false;
 boolean timerStopped = false;
 
-boolean isMouseHowering = false;
 boolean isStartGame = false;
 boolean runMainMenu = true;
 color startButtonBackground = color(250, 150, 10);
 
-float rectPosX = width/2;
-float rectPosY = height/2;
+float rectPosX = width / 2;
+float rectPosY = height / 2;
 float rectSizeX = 315.0;
 float rectSizeY = 115.0;
 
@@ -55,7 +54,7 @@ void start()
   gameOver = false;
   runMainMenu = true;
 
-  for (int i = 0; i < asteroids.length; i++) 
+  for (int i = 0 ; i < asteroids.length ; i++) 
   {
     asteroids[i] = new Asteroid();
   }
@@ -69,9 +68,9 @@ void draw()
     image(splashScreen, width / 2, height / 2);
     StartButton();
 
-    if ((mouseY < (height/2 + 150)) && (mouseY > height/2 + 50))
+    if ((mouseY < (height / 2 + 150)) && (mouseY > height / 2 + 50))
     {
-      if ((mouseX < (width/2 + 150)) && (mouseX > width/2 - 150))
+      if ((mouseX < (width / 2 + 150)) && (mouseX > width / 2 - 150))
       {
         howerGraphics();
         startButtonBackground = color(255, 250, 50);
@@ -83,10 +82,12 @@ void draw()
       }
       startButtonBackground = color(250, 150, 10);
     }
-  } else if (gameOver == true)
+  } 
+  else if (gameOver == true)
   {
     gameover();
-  } else if (win == true)
+  } 
+  else if (win == true)
   {
     victory();
   }
@@ -107,12 +108,12 @@ void draw()
     enemy.draw();
     enemy.update();
 
-    if (asteroidExplosion!=null)
+    if (asteroidExplosion != null)
     {
       asteroidExplosion.draw();
     }
 
-    if (missileExplosion!=null)
+    if (missileExplosion != null)
     {
       missileExplosion.draw();
     }
@@ -141,21 +142,24 @@ void gameover()
   fill (0, 255, 0);
   textSize(64);
   textAlign(CENTER, CENTER);
-  text("GAME OVER", width/2, height/2);
+  text("GAME OVER", width / 2, height / 2);
 }
 
 void victory()
 {
   enemy.bossSize = 0;
+
   if (timerStopped == false) 
   {
     endTime = (millis() - startTime) * 0.001f;
   }
+
   timerStopped = true;
+
   fill (0, 255, 0);
   textSize(64);
   textAlign(CENTER, CENTER);
-  text("VICTORY - BOSS DEFEATED\nTOTAL TIME: " + endTime, width/2, height/2);
+  text("VICTORY - BOSS DEFEATED\nTOTAL TIME: " + endTime, width / 2, height / 2);
 }
 
 void StartButton()
@@ -163,23 +167,19 @@ void StartButton()
   noStroke();
   fill(250, 150, 10);
   rectMode(CENTER);
-  rect(width/2, height/2 + 100, 300, 100);
+  rect(width / 2, height / 2 + 100, 300, 100);
 
   fill(0, 0, 0);
   textSize(42);
   textAlign(CENTER, CENTER);
-  text("START", width/2, height/2 + 100);
+  text("START", width / 2, height / 2 + 100);
 }
 
 void howerGraphics()
 {
   fill(255, 255, 255, 50);
   rectMode(CENTER);
-  rect(width/2, height/2 + 100, 300, 100);
-}
-
-void spaceToContinue()
-{
+  rect(width / 2, height / 2 + 100, 300, 100);
 }
 
 void spawnAsteroidExplosion(PVector position)

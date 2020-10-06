@@ -1,6 +1,6 @@
 class Missiles
 {
-  float missileSize=50;
+  float missileSize = 50.0;
   PVector currentLocation;
   PVector targetLocation;
 
@@ -8,8 +8,8 @@ class Missiles
 
   PVector currentDirection;
 
-  float speed=0.0;
-  float maxSpeed=600.0;
+  float speed = 0.0;
+  float maxSpeed = 600.0;
   float acceleration = 300.0;
 
   //Random angle which direction the missile should launch
@@ -30,7 +30,8 @@ class Missiles
     if (upOrDown < 0.5)
     {
       currentAngle = random(110, 140);
-    } else
+    } 
+    else
     {
       currentAngle = random(220, 250);
     }
@@ -70,7 +71,7 @@ class Missiles
     // ellipse(currentLocation.x, currentLocation.y, missileSize, missileSize);
     pushMatrix();
     translate(currentLocation.x + 27.5, currentLocation.y + 27.5);
-    rotate(radians(-currentAngle+180.0));
+    rotate(radians(-currentAngle + 180.0));
     image(missileSprite, -27.5, -27.5);
     popMatrix();
   }

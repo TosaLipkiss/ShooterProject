@@ -10,14 +10,12 @@ class Player
   PImage spaceSquirrel;
   
 
-
   Player()
   {
     playerPosition = new PVector(playerWidth * 2, height / 2);
     velocityVector = new PVector(0, 0);
     spaceSquirrel = loadImage("sprite_player_80x80.png");  
   }
-
 
   void move()
   {

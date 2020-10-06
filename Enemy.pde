@@ -7,6 +7,7 @@ class Enemy
   PVector bossPos = new PVector();
   PVector bossVel = new PVector();
   int bossSize = 200;
+
   boolean isCharging = false;
   boolean isLaunching = false;
   boolean missileLaunch = false;
@@ -20,13 +21,13 @@ class Enemy
 
   public Enemy()
   {
-  	    for(int i = 0 ; i < bossSprite.length ; i++)
+    for(int i = 0 ; i < bossSprite.length ; i++)
     {
-    	bossSprite[i] = loadImage("sprite_boss" + (i +1) + ".png");
+      bossSprite[i] = loadImage("sprite_boss" + (i +1) + ".png");
     }
 
-    bossPos.x = width/2 + 500;
-    bossPos.y = height/2;
+    bossPos.x = width / 2 + 500;
+    bossPos.y = height / 2;
 
     bossVel.x = -5;
     bossVel.y = 1;
@@ -36,7 +37,7 @@ class Enemy
   void update()
   {
     //Boss only go up and down in Y position when the boss it on this sorten position
-    if (bossPos.y <=  width/2 + 500)
+    if (bossPos.y <=  width / 2 + 500)
     {
       bossPos.y += bossVel.y;
     }
@@ -50,10 +51,10 @@ class Enemy
     //Checking if its time to charge
     if (timer >= chargeInterval)
     {
-      isCharging=true;
+      isCharging = true;
       timer = 0;
     }
-    if (isCharging==true)
+    if (isCharging == true)
     {
       charge();
     }
@@ -67,7 +68,6 @@ class Enemy
         timerLaunch = 0;
       }
     }
-
 
     timerLaunch += deltaTime;
     timer += deltaTime;
@@ -112,9 +112,9 @@ class Enemy
     }
 
     //Boss return to its start position
-    if (bossPos.x > width/2 + 500)
+    if (bossPos.x > width / 2 + 500)
     {
-      bossPos.x = width/2 + 500;
+      bossPos.x = width / 2 + 500;
       chargeInterval = random(10, 15);
 
       isCharging = false;

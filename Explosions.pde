@@ -8,7 +8,7 @@ class AsteroidExplosion
   public AsteroidExplosion(PVector spawnPosition)
   {
     position = spawnPosition;
-    for (int i = 0; i < asteroidExplosionSprite.length; i++)
+    for (int i = 0 ; i < asteroidExplosionSprite.length ; i++)
     {
       asteroidExplosionSprite[i] = loadImage("sprite_asteroidExplosion_25x25_" + (i +1) + ".png");
     }
@@ -41,7 +41,7 @@ class MissileExplosion
   public MissileExplosion(PVector spawnPosition)
   {
     position = spawnPosition;
-    for (int i = 0; i < missileExplosionSprite.length; i++)
+    for (int i = 0 ; i < missileExplosionSprite.length ; i++)
     {
       missileExplosionSprite[i] = loadImage("sprite_explosion_50x50_" + (i +1) + ".png");
     }

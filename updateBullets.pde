@@ -1,13 +1,14 @@
 void updateBullets()
 {
   //Update bullets
-  for (int i = 0; i < bullets.length; i++)
+  for (int i = 0 ; i < bullets.length ; i++)
   {
     if (bullets[i] == null)
     {
       //No bullet, skip to the next one.
       continue;
-    } else
+    } 
+    else
     {
       //found a bullet, update it.
       bullets[i].move();
@@ -17,7 +18,8 @@ void updateBullets()
     {
       healthmanager.bossHealthBarWidthDamage -= 5;
       bullets[i] = null;
-    } else if (bullets[i].bulletPosX >= width)
+    } 
+    else if (bullets[i].bulletPosX >= width)
     {
       bullets[i] = null;
     }
