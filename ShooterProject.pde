@@ -66,13 +66,13 @@ void draw()
   {
     background(0, 0, 0);
     image(splashScreen, width / 2, height / 2);
-    StartButton();
+    startButton();
 
     if ((mouseY < (height / 2 + 150)) && (mouseY > height / 2 + 50))
     {
       if ((mouseX < (width / 2 + 150)) && (mouseX > width / 2 - 150))
       {
-        howerGraphics();
+        hoverGraphics();
         startButtonBackground = color(255, 250, 50);
         if (mousePressed)
         {
@@ -85,7 +85,7 @@ void draw()
   } 
   else if (gameOver == true)
   {
-    gameover();
+    gameOver();
   } 
   else if (win == true)
   {
@@ -131,55 +131,6 @@ void draw()
 
     time = elapsedTime;
   }
-}
-
-////////METHODS///
-void gameover()
-{
-  player1.playerWidth = 0;
-  player1.playerHeight = 0;
-  healthmanager.playerHealthBarWidthDamage = 0;
-  fill (0, 255, 0);
-  textSize(64);
-  textAlign(CENTER, CENTER);
-  text("GAME OVER", width / 2, height / 2);
-}
-
-void victory()
-{
-  enemy.bossSize = 0;
-
-  if (timerStopped == false) 
-  {
-    endTime = (millis() - startTime) * 0.001f;
-  }
-
-  timerStopped = true;
-
-  fill (0, 255, 0);
-  textSize(64);
-  textAlign(CENTER, CENTER);
-  text("VICTORY - BOSS DEFEATED\nTOTAL TIME: " + endTime, width / 2, height / 2);
-}
-
-void StartButton()
-{
-  noStroke();
-  fill(250, 150, 10);
-  rectMode(CENTER);
-  rect(width / 2, height / 2 + 100, 300, 100);
-
-  fill(0, 0, 0);
-  textSize(42);
-  textAlign(CENTER, CENTER);
-  text("START", width / 2, height / 2 + 100);
-}
-
-void howerGraphics()
-{
-  fill(255, 255, 255, 50);
-  rectMode(CENTER);
-  rect(width / 2, height / 2 + 100, 300, 100);
 }
 
 void spawnAsteroidExplosion(PVector position)
