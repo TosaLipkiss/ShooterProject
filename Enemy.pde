@@ -31,6 +31,7 @@ class Enemy
 
     bossVel.x = -5;
     bossVel.y = 1;
+
     ellipseMode(CENTER);
   }
 
@@ -54,6 +55,7 @@ class Enemy
       isCharging = true;
       timer = 0;
     }
+
     if (isCharging == true)
     {
       charge();
@@ -99,7 +101,6 @@ class Enemy
     spriteTimer += deltaTime;
   }
 
-  //The boss charges forward in X position in a interval of 5-15 seconds. 
   void charge()
   {
     bossPos.y -= bossVel.y;
@@ -115,6 +116,7 @@ class Enemy
     if (bossPos.x > width / 2 + 500)
     {
       bossPos.x = width / 2 + 500;
+      //The boss charges forward in X position in a interval of 10-15 seconds. 
       chargeInterval = random(10, 15);
 
       isCharging = false;

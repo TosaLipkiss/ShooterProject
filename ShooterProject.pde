@@ -132,12 +132,3 @@ void draw()
     time = elapsedTime;
   }
 }
-
-void spawnAsteroidExplosion(PVector position)
-{
-  asteroidExplosion = new AsteroidExplosion(position);
-}
-void spawnMissileExplosion(PVector position)
-{
-  missileExplosion = new MissileExplosion(position);
-}

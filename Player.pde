@@ -34,6 +34,7 @@ class Player
     velocityVector.y += moveVector.y;
 
     velocityVector.limit(maxVelocity);
+
     playerPosition.x += velocityVector.x * deltaTime;
     playerPosition.y += velocityVector.y * deltaTime;
   }
@@ -51,7 +52,8 @@ class Player
   {
     if (playerPosition.y + playerHeight / 2 > height || playerPosition.y - playerHeight / 2 < 0)
     {
-      velocityVector.y *= -1; //If the ball touches the end of the screen in y led will bounce back in the other direction
+      //If the player touches the end of the screen in y led will bounce back in the other direction.
+      velocityVector.y *= -1; 
     }
   }
 }

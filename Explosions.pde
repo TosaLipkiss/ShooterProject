@@ -8,6 +8,7 @@ class AsteroidExplosion
   public AsteroidExplosion(PVector spawnPosition)
   {
     position = spawnPosition;
+
     for (int i = 0 ; i < asteroidExplosionSprite.length ; i++)
     {
       asteroidExplosionSprite[i] = loadImage("sprite_asteroidExplosion_25x25_" + (i +1) + ".png");
@@ -24,7 +25,7 @@ class AsteroidExplosion
 
     if(currentFrame < 20)
     {
-    image(asteroidExplosionSprite[currentFrame % asteroidExplosionSprite.length], position.x, position.y);
+      image(asteroidExplosionSprite[currentFrame % asteroidExplosionSprite.length], position.x, position.y);
     }
 
     spriteTimer += deltaTime;
@@ -41,6 +42,7 @@ class MissileExplosion
   public MissileExplosion(PVector spawnPosition)
   {
     position = spawnPosition;
+
     for (int i = 0 ; i < missileExplosionSprite.length ; i++)
     {
       missileExplosionSprite[i] = loadImage("sprite_explosion_50x50_" + (i +1) + ".png");
@@ -57,9 +59,19 @@ class MissileExplosion
 
     if(currentFrame < 20)
     {
-    image(missileExplosionSprite[currentFrame % missileExplosionSprite.length], position.x, position.y);
+      image(missileExplosionSprite[currentFrame % missileExplosionSprite.length], position.x, position.y);
     }
 
     spriteTimer += deltaTime;
   }
+}
+
+void spawnAsteroidExplosion(PVector position)
+{
+  asteroidExplosion = new AsteroidExplosion(position);
+}
+
+void spawnMissileExplosion(PVector position)
+{
+  missileExplosion = new MissileExplosion(position);
 }

@@ -14,7 +14,7 @@ boolean roundCollision(float x1, float y1, float size1, float x2, float y2, floa
   {
     return false;
   }
-  //We now know the points are closer then the distance so we are colliding!
+  //We now know the points are closer than the distance so we are colliding!
   else
   {
     return true;

@@ -5,9 +5,14 @@ boolean moveDown;
 void keyPressed()
 {
   if (keyCode == UP || key == 'a')
+  {
     moveUp = true;
+  }
   else if (keyCode == DOWN || key == 'd')
+  {
     moveDown = true;
+  }
+
   //Spawn new bullet it we press "space-bar"
   if (key == 32) 
   {
@@ -22,6 +27,7 @@ void keyPressed()
       }
     }
   }
+
   if (key == 'b')
   {
     start();
@@ -31,20 +37,28 @@ void keyPressed()
 void keyReleased()
 {
   if (keyCode == UP || key == 'a')
+  {
     moveUp = false;
+  }
   else if (keyCode == DOWN || key == 'd')
+  {
     moveDown = false;
+  }
 }
 
 PVector input()
 {
   PVector input = new PVector();
 
-  if (moveUp)    
+  if (moveUp)
+  {
     input.y += -1;
+  }
 
-  if (moveDown)  
+  if (moveDown)
+  {
     input.y +=  1;
+  }
 
   input.normalize();
   return input;
